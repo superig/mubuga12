@@ -1,0 +1,156 @@
+
+body {
+  background-image: url('delphin.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+  
+ 
+  header {
+    background-color: #000000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+ 
+  .converter {
+    background-color: gray;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .converter h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .converter label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .converter input,
+  .converter select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .converter button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .converter button:hover {
+    background-color: #333333;
+  }
+  
+  #result {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: lightpink;
+    color: black;
+  }
+  
+  footer a {
+    color: white;
+    text-decoration: underline;
+  }
+    body {
+      background-image: url('delphin.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    header {
+      background-color: #000000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .converter {
+      background-color: gray;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .converter h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .converter label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .converter input,
+    .converter select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .converter button {
+      background-color: #000000;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .converter button:hover {
+      background-color: #333333;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: lightpink;
+      color: black;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }

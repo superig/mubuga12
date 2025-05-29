@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #f3f4f6 url('forgot.png') no-repeat center center;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      max-width: 340px;
+      width: 90%;
+    }
+
+    h2 {
+      text-align: center;
+      color: gray;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
+    }
+
+    input[type="tel"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .password-toggle-icon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+
+    button {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      background-color: #434190;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 16px;
+      color: #38a169;
+      font-weight: bold;
+      display: none;
+      font-size: 14px;
+    }
+
+    .loading {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #555;
+      display: none;
+    }
+
+    .dots::after {
+      content: '';
+      animation: dots 1.5s steps(3, end) infinite;
+    }
+
+    @keyframes dots {
+      0% { content: ''; }
+      33% { content: '.'; }
+      66% { content: '..'; }
+      100% { content: '...'; }
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .previous-btn {
+      background-color: #ddd;
+      color: #333;
+      width: 48%;
+    }
+
+    .previous-btn:hover {
+      background-color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Reset Password</h2>
+    <form id="resetForm">
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required placeholder="Enter your phone number" pattern="^\d{10}$" title="Please enter a 10-digit phone number.">
+
+      <label for="currentPassword">Current Password:</label>
+      <div class="input-container">
+        <input type="password" id="currentPassword" required placeholder="Enter current password">
+        <i class="fas fa-eye password-toggle-icon" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')"></i>
+      </div>
+
+      <label for="newPassword">New Password:</label>
+      <div class="input-container">
+        <input type="password" id="newPassword" required placeholder="Enter new password" minlength="8" title="Password must be at least 8 characters.">
+        <i class="fas fa-eye password-toggle-icon" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')"></i>
+      </div>
+
+      <label for="confirmPassword">Confirm New Password:</label>
+      <input type="password" id="confirmPassword" required placeholder="Confirm new password">
+
+      <div class="button-container">
+        <button type="button" class="previous-btn" onclick="window.history.back()">Previous</button>
+        <button type="submit">Reset Password</button>
+      </div>
+    </form>
+
+    <div class="loading" id="loading">Processing<span class="dots"></span></div>
+    <div class="message" id="successMessage">Password has been reset successfully!</div>
+  </div>
+
+  <script>
+    const form = document.getElementById("resetForm");
+    const loading = document.getElementById("loading");
+    const message = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const phone = document.getElementById("phone").value;
+      const currentPassword = document.getElementById("currentPassword").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      // Validate password match
+      if (newPassword !== confirmPassword) {
+        alert("New passwords do not match!");
+        return;
+      }
+
+      // Basic validation for phone number format
+      const phoneRegex = /^\d{10}$/;
+      if (!phone.match(phoneRegex)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+      }
+
+      loading.style.display = "block";
+      message.style.display = "none";
+
+      setTimeout(() => {
+        loading.style.display = "none";
+        message.style.display = "block";
+        form.reset();
+      }, 2000);
+    });
+
+    function togglePasswordVisibility(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  </script>
+
+</body>
+</html>

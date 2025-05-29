@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUBUGA Currency Converter</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+  <header>
+    <h1>MUBUGA CURRENCY EXCHANGE</h1>
+  </header>
+
+  <section class="converter">
+    <h2>Currency Converter</h2>
+
+    <label for="amount">Enter amount:</label>
+    <input type="text" id="amount" placeholder="Enter amount" required maxlength="8">
+
+    <label for="from">From currency:</label>
+    <select id="from">
+      <option value="USD">USD - US Dollar</option>
+      <option value="EUR">EUR - Euro</option>
+      <option value="RWF">RWF - Rwandan Franc</option>
+    </select>
+
+    <label for="to">To currency:</label>
+    <select id="to">
+      <option value="USD">USD - US Dollar</option>
+      <option value="EUR">EUR - Euro</option>
+      <option value="RWF">RWF - Rwandan Franc</option>
+    </select>
+
+    <button id="convertBtn">Convert</button>
+
+    <p id="result"></p>
+  </section>
+
+  <footer>
+    <p>2025 MUBUGA Currency Exchange - <a href="convert.html">Go to Home</a></p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+   
+      const convertBtn = document.getElementById("convertBtn");
+      const amountInput = document.getElementById("amount");
+      const fromSelect = document.getElementById("from");
+      const toSelect = document.getElementById("to");
+      const resultDisplay = document.getElementById("result");
+
+
+      amountInput.addEventListener("input", () => {
+        let value = amountInput.value;
+        value = value.replace(/[^0-9.]/g, "");
+        const parts = value.split(".");
+
+        if (parts.length > 2) value = parts[0] + "." + parts[1];
+        const numericOnly = value.replace(".", "");
+        if (numericOnly.length > 8) {
+          value = numericOnly.slice(0, 8);
+          if (parts.length === 2) {
+            value = value.slice(0, parts[0].length) + "." + parts[1];
+          }
+        }
+        amountInput.value = value;
+      });
+
+    
+      convertBtn.addEventListener("click", function () {
+        const amountValue = amountInput.value.trim();
+        const from = fromSelect.value;
+        const to = toSelect.value;
+
+        const isEmpty = amountValue === "";
+        const isTooLong = amountValue.replace(".", "").length > 8;
+        const parsedAmount = parseFloat(amountValue);
+        const isInvalid = isNaN(parsedAmount) || parsedAmount <= 0;
+
+        if (isEmpty || isTooLong || isInvalid) {
+
+          amountInput.classList.add("shake");
+
+          
+          setTimeout(() => {
+            amountInput.classList.remove("shake");
+          }, 500);
+
+          resultDisplay.innerText =
+            isEmpty ? "❌ Please enter an amount." :
+            isTooLong ? "❌ Maximum of 8 digits allowed." :
+            "❌ Please enter a valid, positive number.";
+          return;
+        }
+
+    
+        const rate =
+          from === "USD" && to === "RWF" ? 1300 :
+          from === "EUR" && to === "RWF" ? 1400 :
+          from === "RWF" && to === "USD" ? 1 / 1300 :
+          from === "RWF" && to === "EUR" ? 1 / 1400 :
+          from === to ? 1 : 0;
+
+        if (rate === 0) {
+          resultDisplay.innerText = "⚠️ Currency conversion not supported.";
+          return;
+        }
+
+        const result = parsedAmount * rate;
+        resultDisplay.innerText = `${parsedAmount} ${from} = ${result.toFixed(2)} ${to}`;
+      });
+    });
+  </script>
+
+</body>
+</html>
